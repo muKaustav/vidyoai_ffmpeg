@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sqlalchemy
+python-decouple
+redis
+aioredis
+celery
+psycopg2-binary
+python-multipart
+ffmpeg-python
+boto3
+requests
+python-multipart
