@@ -1,10 +1,71 @@
 from decouple import config
 from core.db import conn
 from sqlalchemy.orm import Session
+from models.user import Users
 from models.task import AudioExtractTasks, WatermarkTasks
 
 
+def get_all_users():
+    """
+    Get users from Users table
+    """
+
+    try:
+        with Session(bind=conn) as db:
+            result = db.execute(Users.select()).fetchall()
+            result_list = []
+
+            for row in result:
+                try:
+                    result_list.append(
+                        {
+                            "name": row[1],
+                            "email": row[2],
+                        }
+                    )
+
+                except Exception as e:
+                    print(str(e))
+
+            response = {"status": "successful", "data": result_list}
+
+            return response
+
+    except Exception as e:
+        raise Exception(str(e))
+
+    finally:
+        db.close()
+
+
+def create_new_user(name, email):
+    """
+    Create user in Users table
+    """
+
+    try:
+        with Session(bind=conn) as db:
+            new_user = {"name": name, "email": email}
+
+            db.execute(Users.insert().values(new_user))
+            db.commit()
+
+            response = {"status": "successful", "message": "User created successfully."}
+
+            return response
+
+    except Exception as e:
+        raise Exception(str(e))
+
+    finally:
+        db.close()
+
+
 def get_audio_task(unique_id):
+    """
+    Get audio task from AudioExtractTasks table
+    """
+
     try:
         with Session(bind=conn) as db:
             result = db.execute(
@@ -41,6 +102,10 @@ def get_audio_task(unique_id):
 
 
 def add_audio_task(email, timestamp):
+    """
+    Add audio task to AudioExtractTasks table
+    """
+
     try:
         with Session(bind=conn) as db:
             new_task = {"email": email, "status": "pending", "timestamp": timestamp}
@@ -58,6 +123,10 @@ def add_audio_task(email, timestamp):
 
 
 def update_audio_task(audio_file_path, email, timestamp):
+    """
+    Update audio task in AudioExtractTasks table
+    """
+
     audio_file_url = f"https://{config('S3_BUCKET_NAME')}.s3.amazonaws.com/{audio_file_path.split('/')[-1]}"
 
     update_task = {"status": "completed", "url": audio_file_url}
@@ -83,6 +152,10 @@ def update_audio_task(audio_file_path, email, timestamp):
 
 
 def get_video_task(unique_id):
+    """
+    Get video task from WatermarkTasks table
+    """
+
     try:
         with Session(bind=conn) as db:
             result = db.execute(
@@ -117,6 +190,10 @@ def get_video_task(unique_id):
 
 
 def add_video_watermark_task(email, timestamp, watermark_params):
+    """
+    Add video watermark task to WatermarkTasks table
+    """
+
     try:
         with Session(bind=conn) as db:
             new_task = {
@@ -139,6 +216,10 @@ def add_video_watermark_task(email, timestamp, watermark_params):
 
 
 def update_video_task(video_file_path, email, timestamp):
+    """
+    Update video task in WatermarkTasks table
+    """
+
     video_file_url = f"https://{config('S3_BUCKET_NAME')}.s3.amazonaws.com/{video_file_path.split('/')[-1]}"
 
     update_task = {"status": "completed", "url": video_file_url}

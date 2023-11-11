@@ -3,6 +3,10 @@ from sqlalchemy.sql.sqltypes import Integer, String
 from core.db import meta, engine
 
 
+"""
+Users table
+"""
+
 Users = Table(
     "users",
     meta,

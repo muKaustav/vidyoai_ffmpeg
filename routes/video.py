@@ -10,6 +10,9 @@ video = APIRouter()
 
 
 def get_current_epoch():
+    """
+    Get current epoch time
+    """
     return str(int(time.time()))
 
 
@@ -22,8 +25,7 @@ async def video_watermark(
 ):
     """
     @api {post} /video-watermark Create Video Watermark Task
-    @formData {File} file Video file to be watermarked
-    @formData {File} watermark Watermark image file
+    @formData {List[UploadFile]} files List of files to upload
     @formData {String} email Email of the user
     @queryParam {Number} x_offset X offset of the watermark, default: 0
     @queryParam {Number} y_offset Y offset of the watermark, default: 0

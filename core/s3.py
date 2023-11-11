@@ -12,6 +12,10 @@ s3_client = boto3.client(
 
 
 def create_presigned_post(object_path, expiration=3600):
+    """
+    Create presigned post to upload file to S3
+    """
+
     file_name = object_path.split("/")[-1]
 
     response = s3_client.generate_presigned_post(
@@ -19,8 +23,6 @@ def create_presigned_post(object_path, expiration=3600):
         file_name,
         ExpiresIn=expiration,
     )
-
-    print(response)
 
     files = {"file": open(object_path, "rb")}
 

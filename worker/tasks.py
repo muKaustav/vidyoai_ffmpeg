@@ -11,6 +11,10 @@ logger = get_task_logger(__name__)
 
 @shared_task(bind=True, name="remove_temp_files")
 def remove_temp_files(self, video_path, audio_path, watermark_video_path=None):
+    """
+    Remove temp files
+    """
+
     try:
         os.remove(video_path)  # remove video file
         os.remove(audio_path)  # remove audio file
@@ -28,6 +32,10 @@ def remove_temp_files(self, video_path, audio_path, watermark_video_path=None):
 
 @shared_task(bind=True, name="process_audio_util")
 def process_audio_util(self, video_file_path, audio_file_path, email, timestamp):
+    """
+    Extract audio from video
+    """
+
     try:
         commands = [
             "ffmpeg",
@@ -36,7 +44,7 @@ def process_audio_util(self, video_file_path, audio_file_path, email, timestamp)
             audio_file_path,
         ]
 
-        subprocess.run(commands)
+        subprocess.run(commands)  # Example: ffmpeg -i video.mp4 audio.mp3
 
         create_presigned_post(audio_file_path)  # upload to s3
 
@@ -56,6 +64,10 @@ def process_audio_util(self, video_file_path, audio_file_path, email, timestamp)
 
 @shared_task(bind=True, name="process_audio")
 def process_audio(self, file_path, email, timestamp):
+    """
+    Process audio
+    """
+
     logger.info("Starting audio processing...")
 
     try:
@@ -88,6 +100,10 @@ def process_video_util(
     email,
     timestamp,
 ):
+    """
+    Add watermark to video
+    """
+
     try:
         output_video_path = f"worker/media/proc_{video_file_path.split('/')[-1]}"
 
@@ -102,7 +118,9 @@ def process_video_util(
             output_video_path,
         ]
 
-        subprocess.run(commands)
+        subprocess.run(
+            commands
+        )  # Example: ffmpeg -i video.mp4 -i watermark.png -filter_complex "[1]scale=min(iw\,100):min(ih\,100) [watermark]; [0][watermark]overlay=W-w-10:H-h-10" output.mp4
 
         create_presigned_post(output_video_path)  # Upload to S3
 
@@ -126,6 +144,10 @@ def process_video_util(
 def process_video_watermark(
     self, video_file_path, watermark_file_path, x_offset, y_offset, email, timestamp
 ):
+    """
+    Process video watermark
+    """
+    
     logger.info("Starting video watermarking...")
 
     try:

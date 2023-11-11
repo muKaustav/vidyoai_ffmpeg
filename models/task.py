@@ -2,6 +2,9 @@ from sqlalchemy import Table, Column
 from sqlalchemy.sql.sqltypes import Integer, String
 from core.db import meta, engine
 
+"""
+Audio Extract Tasks Table
+"""
 AudioExtractTasks = Table(
     "audio_extract_tasks",
     meta,
@@ -12,6 +15,10 @@ AudioExtractTasks = Table(
     Column("timestamp", String(255)),
 )
 
+
+"""
+Video Watermark Tasks Table
+"""
 WatermarkTasks = Table(
     "watermark_tasks",
     meta,
