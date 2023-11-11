@@ -14,4 +14,4 @@ COPY . .
 
 ENTRYPOINT []
 
-CMD ["celery", "-A", "worker.celery", "worker", "--loglevel=info", "--concurrency=10", "--uid=nobody"]
+CMD ["celery", "-A", "worker.celery", "worker", "--loglevel=info", "--concurrency=4", "--uid=nobody"]
