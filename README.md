@@ -12,7 +12,7 @@
 
 _**Note:**_ Authentication is not implemented since it was not mentioned in the problem statement. But I have made the user creation flow nevertheless, and JWT authentication can be implemented easily.
 
-### User
+### 1. User
 
 - **POST** `/user` : Create a new user.
 
@@ -24,7 +24,7 @@ FormData:
 
 - **GET** `/user` : Get user details by user id.
 
-### Video & Audio
+### 2. Video & Audio
 
 - **POST** `/video/watermark` : Takes a video file and a watermark image as input, applies the watermark, stores the video in AWS S3, updates PostgreSQL the processed file and its details.
 
@@ -51,7 +51,7 @@ FormData:
 - **GET** `/video/watermark/{unique_id}` : Get video details and processsed video URL by unique video id.
 - **GET** `/audio/extract/{unique_id}` : Get audio details and processsed audio URL by unique audio id.
 
-### TEST APIs
+### 🧪 | TEST APIs
 
 ```yml
 1. POST http://localhost:4000/user
@@ -99,7 +99,7 @@ Response: will return status code, and unique_id
 
 ## 💻 | Architecture
 
-### What I have implemented:
+### 🎯 | What I have implemented:
 
 <p align = center>
     <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/implemented_arch.jpeg?token=GHSAT0AAAAAACGUZWEROTQOX6IPJUWPZDWKZKPZJNQ" target="_blank" />
@@ -112,7 +112,35 @@ Response: will return status code, and unique_id
 - **Nginx** is used as a reverse proxy server, to load balance the requests between N instances of **fastapi-web**.
 - Have created a distributed task queue using **RabbitMQ** and **Celery**. The Celery workers can be scaled up and down, depending on the load.
 
-### What I can implement to improve the architecture:
+### 📖 | Database Schema
+
+**Audio Extract Tasks Table**
+| | |
+|--|--|
+|id |string |
+|email|string |
+|status|string |
+|url|string |
+|timestamp|string |
+
+**Video Watermark Tasks Table**
+| | |
+|--|--|
+|id |string |
+|email|string |
+|watermark_params|string |
+|status|string |
+|url|string |
+|timestamp|string |
+
+**User Table**
+| | |
+|--|--|
+|id |string |
+|name|string |
+|email|string |
+
+### 💡| What I can implement to improve the architecture:
 
 <p align = center>
     <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/efficient_arch.jpeg?token=GHSAT0AAAAAACGUZWEQSALXK4CWSWC6MRB4ZKPZUHQ" target="_blank" />
