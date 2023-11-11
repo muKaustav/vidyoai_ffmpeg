@@ -123,6 +123,7 @@ Response: will return status code, and unique_id
 - **AWS API Gateway** can be used to create a REST API, which will trigger the Celery tasks. This will help in decoupling the web service from the task queue, essentially opting for a microservice architecture.
 - **AWS Elastic Load Balancer** can be used to load balance the requests between the N instances of **fastapi-web**.
 - **PostgreSQL** can be replaced with **AWS RDS**. This will help in scaling the database, and also in monitoring the database.
+- **FFMPEG** logic can be further improved upon by using more efficient codecs, and also by using GPU acceleration. Or we can use a cloud service like AWS Elastic Transcoder.
 
   <br/>
 
