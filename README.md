@@ -8,11 +8,20 @@
 
 <br/>
 
-## 🚀 | APIs
+## 🚀 | APIs (Run and Test)
+
+_**Note:**_ Authentication is not implemented since it was not mentioned in the problem statement. But I have made the user creation flow nevertheless, and JWT authentication can be implemented easily.
 
 ### User
 
 - **POST** `/user` : Create a new user.
+
+```yml
+FormData:
+  - name
+  - email
+```
+
 - **GET** `/user` : Get user details by user id.
 
 ### Video & Audio
@@ -41,6 +50,40 @@ FormData:
 
 - **GET** `/video/watermark/{unique_id}` : Get video details and processsed video URL by unique video id.
 - **GET** `/audio/extract/{unique_id}` : Get audio details and processsed audio URL by unique audio id.
+
+### TEST APIs
+
+```yml
+1. POST http://localhost:4000/user
+FormData:
+  - name: <name>
+  - email: <email>
+
+2. GET http://localhost:4000/user
+
+3. POST http://localhost:4000/video/watermark?x_offset=10&y_offset=10
+Query Params:
+  - x_offset=10
+  - y_offset=10
+FormData:
+  - files:
+      - <video.mp4>
+      - <watermark.png>
+  - email: <email>
+
+Response: will return status code, and unique_id
+
+4. POST http://localhost:4000/audio/extract
+FormData:
+  - file: <video.mp4>
+  - email: <email>
+
+Response: will return status code, and unique_id
+
+5. GET http://localhost:4000/video/watermark/<unique_id>
+
+6. GET http://localhost:4000/audio/extract/<unique_id>
+```
 
   <br/>
 
@@ -72,12 +115,12 @@ FormData:
 ### What I can implement to improve the architecture:
 
 <p align = center>
-    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/improved_arch.jpeg?token=GHSAT0AAAAAACGUZWEQOSI3GU2W5GW7TMOQZKPZOQA" target="_blank" />
+    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/efficient_arch.jpeg?token=GHSAT0AAAAAACGUZWEQSALXK4CWSWC6MRB4ZKPZUHQ" target="_blank" />
 </p>
 
 - **Redis** can be used as a distributed cache, to store the task results. This will reduce the load on the database.
 - **Kubernetes** can be used to orchestrate the containers. This will help in scaling the containers, and also in monitoring the containers.
-- **AWS API Gateway** can be used to create a REST API, which will trigger the Celery tasks. This will help in decoupling the web service from the task queue.
+- **AWS API Gateway** can be used to create a REST API, which will trigger the Celery tasks. This will help in decoupling the web service from the task queue, essentially opting for a microservice architecture.
 - **AWS Elastic Load Balancer** can be used to load balance the requests between the N instances of **fastapi-web**.
 - **PostgreSQL** can be replaced with **AWS RDS**. This will help in scaling the database, and also in monitoring the database.
 
