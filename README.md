@@ -56,9 +56,32 @@ FormData:
 
 ## 💻 | Architecture
 
-- ![](./assets/architecture.png)
+### What I have implemented:
 
-<br/>
+<p align = center>
+    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/implemented_arch.jpeg?token=GHSAT0AAAAAACGUZWEROTQOX6IPJUWPZDWKZKPZJNQ" target="_blank" />
+</p>
+
+- **FastAPI** is used to create the web service.
+- **PostgreSQL** is used to store the user, video and audio task details.
+- **AWS S3** is used to store the processed video and audio files.
+- **Docker** is used to containerize the applications. Also using docker for ffmpeg environment. Containers can be scaled up and down, depending on the load.
+- **Nginx** is used as a reverse proxy server, to load balance the requests between N instances of **fastapi-web**.
+- Have created a distributed task queue using **RabbitMQ** and **Celery**. The Celery workers can be scaled up and down, depending on the load.
+
+### What I can implement to improve the architecture:
+
+<p align = center>
+    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/improved_arch.jpeg?token=GHSAT0AAAAAACGUZWEQOSI3GU2W5GW7TMOQZKPZOQA" target="_blank" />
+</p>
+
+- **Redis** can be used as a distributed cache, to store the task results. This will reduce the load on the database.
+- **Kubernetes** can be used to orchestrate the containers. This will help in scaling the containers, and also in monitoring the containers.
+- **AWS API Gateway** can be used to create a REST API, which will trigger the Celery tasks. This will help in decoupling the web service from the task queue.
+- **AWS Elastic Load Balancer** can be used to load balance the requests between the N instances of **fastapi-web**.
+- **PostgreSQL** can be replaced with **AWS RDS**. This will help in scaling the database, and also in monitoring the database.
+
+  <br/>
 
 ## 🧑🏽 | Author
 
