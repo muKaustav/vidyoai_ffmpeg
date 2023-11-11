@@ -8,6 +8,16 @@
 
 <br/>
 
+## 🌐 | Test Project
+
+- Install Docker Desktop, and clone this repository. Pruning existing volumes on your local machine is recommended.
+- Create .env file in the root directory. (Since this is a private repository, I have mentioned the credentials in the .env.example file, for your testing purposes. Please copy the contents of .env.example to .env)
+- Change HOST_IP in .env to your host IP address.
+- Run `docker-compose up --build --scale fastapi-web=3` to build the docker images, and start the containers, with 3 instances of **fastapi-web** running. This will demonstrate the load balancing capabilities of the application.
+- Run `docker-compose down` to stop the containers.
+
+<br/>
+
 ## 🚀 | APIs (Run and Test)
 
 _**Note:**_ Authentication is not implemented since it was not mentioned in the problem statement. But I have made the user creation flow nevertheless, and JWT authentication can be implemented easily.
@@ -86,16 +96,6 @@ Response: will return status code, and unique_id
 ```
 
   <br/>
-
-## 🌐 | Test Project
-
-- Install Docker Desktop, and clone this repository.
-- Create .env file in the root directory. (Since this is a private repository, I have mentioned the credentials in the .env.example file, for your testing purposes. Please copy the contents of .env.example to .env)
-- Change HOST_IP in .env to your host IP address.
-- Run `docker-compose up --build --scale fastapi-web=3` to build the docker images, and start the containers, with 3 instances of **fastapi-web** running. This will demonstrate the load balancing capabilities of the application.
-- Run `docker-compose down` to stop the containers.
-
-<br/>
 
 ## 💻 | Architecture
 
