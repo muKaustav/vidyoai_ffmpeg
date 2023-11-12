@@ -11,7 +11,7 @@
 ## 🌐 | Test Project
 
 - Install Docker Desktop, and clone this repository. Pruning existing volumes on your local machine is recommended.
-- Create .env file in the root directory. (Since this is a private repository, I have mentioned the credentials in the .env.example file, for your testing purposes. Please copy the contents of .env.example to .env)
+- Create .env file in the root directory. (I have mentioned the credentials in the .env.example file, for your testing purposes. Please copy the contents of .env.example to .env). Credentials in Notion doc in repo description.
 - Change HOST_IP in .env to your host IP address.
 - Run `docker-compose up --build --scale fastapi-web=3` to build the docker images, and start the containers, with 3 instances of **fastapi-web** running. This will demonstrate the load balancing capabilities of the application.
 - Run `docker-compose down` to stop the containers.
@@ -102,7 +102,7 @@ Response: will return status code, and unique_id
 ### 🎯 | What I have implemented:
 
 <p align = center>
-    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/efficient_arch.jpeg" target="_blank" />
+    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/implemented_arch.jpeg" target="_blank" />
 </p>
 
 - **FastAPI** is used to create the web service.
@@ -143,7 +143,7 @@ Response: will return status code, and unique_id
 ### 💡| What I can implement to improve the architecture:
 
 <p align = center>
-    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/efficient_arch.jpeg?token=GHSAT0AAAAAACGUZWEQSALXK4CWSWC6MRB4ZKPZUHQ" target="_blank" />
+    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/efficient_arch.jpeg" target="_blank" />
 </p>
 
 - **Redis** can be used as a distributed cache, to store the task results. This will reduce the load on the database.
