@@ -102,7 +102,7 @@ Response: will return status code, and unique_id
 ### 🎯 | What I have implemented:
 
 <p align = center>
-    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/implemented_arch.jpeg?token=GHSAT0AAAAAACGUZWEROTQOX6IPJUWPZDWKZKPZJNQ" target="_blank" />
+    <img alt="Project Logo" src="https://raw.githubusercontent.com/muKaustav/vidyoai_ffmpeg/main/assets/efficient_arch.jpeg" target="_blank" />
 </p>
 
 - **FastAPI** is used to create the web service.
